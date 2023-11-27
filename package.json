@@ -10,8 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.1.0",
     "@nuxt/devtools": "latest",
+    "eslint": "^8.54.0",
     "nuxt": "^3.8.2",
+    "nuxt-primevue": "^0.2.1",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   }
