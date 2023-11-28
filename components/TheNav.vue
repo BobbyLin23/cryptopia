@@ -3,17 +3,22 @@
 </script>
 
 <template>
-  <header
-    class="backdrop-blur border-b sticky -mb-px top-0 z-50
-    border-gray-200/75 dark:border-gray-700/50"
+  <nav
+    class="border-b border-gray-200/75 dark:border-gray-700/50 h-16 flex items-center
+    px-6"
   >
-    <div class="mx-auto px-4 sm:px-5 lg:px-8 max-w-7xl flex items-center justify-between gap-3 h-16">
-      <h1 class="text-2xl font-semibold">
-        Cryptopia
-      </h1>
-      <div class="flex-auto" />
-      <UButton icon="i-heroicons-document-duplicate-solid" variant="ghost" color="gray" />
+    <div class="text-2xl font-semibold text-green-500">
+      Cryptopia
+    </div>
+    <div class="flex-auto" />
+    <div class="flex items-center gap-3">
+      <UButton
+        variant="ghost"
+        label="Dashboard"
+        color="gray"
+        @click="$router.push('/dashboard')"
+      />
       <ModeToggle />
     </div>
-  </header>
+  </nav>
 </template>
