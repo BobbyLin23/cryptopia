@@ -7,11 +7,22 @@ export default defineNuxtConfig({
       name: 'page',
       mode: 'out-in',
     },
+    layoutTransition: {
+      name: 'layout',
+      mode: 'out-in',
+    },
   },
   pinia: {
     storesDirs: ['./stores/**'],
   },
   ui: {
     icons: ['carbon'],
+  },
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      exclude: ['/', '/register'],
+    },
   },
 })

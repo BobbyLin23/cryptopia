@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const user = useSupabaseUser()
 </script>
 
 <template>
@@ -19,6 +19,9 @@
         @click="$router.push('/dashboard')"
       />
       <ModeToggle />
+      <LanguageSelect />
+      <ExchangeSelect />
+      <UserButton v-if="user" />
     </div>
   </nav>
 </template>

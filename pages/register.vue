@@ -23,9 +23,12 @@ const state = reactive({
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const { error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signUp({
     email: event.data.email,
     password: event.data.password,
+    options: {
+      emailRedirectTo: 'http://localhost:3000/confirm',
+    },
   })
 
   if (error) {
@@ -37,9 +40,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   else {
     toast.add({
       color: 'green',
-      title: 'Log in successfully!',
+      title: 'Account created!',
+      description: 'Check your email for confirmation',
     })
-    navigateTo('/confirm')
   }
 }
 
@@ -82,7 +85,7 @@ async function signInWithGoogle() {
   border-gray-200/75 dark:border-gray-700 shadow-md"
   >
     <h1 class="text-center text-xl font-semibold">
-      Sign in to Cryptopia
+      Sign up to Cryptopia
     </h1>
     <UForm
       :schema="schema"
@@ -97,11 +100,11 @@ async function signInWithGoogle() {
       <UFormGroup label="Password" name="password">
         <UInput v-model="state.password" type="password" />
       </UFormGroup>
-      <UButton label="Sign in" block type="submit" />
+      <UButton label="Sign up" block type="submit" />
       <p class="text-sm text-gray-500 text-center">
-        Don't have an account?
-        <NuxtLink to="/register" class="text-green-500 hover:text-opacity-70">
-          Register
+        Already have an account?
+        <NuxtLink to="/login" class="text-green-500 hover:text-opacity-70">
+          Sign In
         </NuxtLink>
       </p>
     </UForm>

@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <div
-    class="w-full rounded flex p-4 items-center
+    class="w-full rounded flex p-3 items-center
     hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer px-8"
     :class="$route.path === href ? 'bg-gray-100 dark:bg-gray-700' : ''"
     @click="$router.push(href)"

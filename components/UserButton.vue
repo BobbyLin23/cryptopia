@@ -1,17 +1,30 @@
 <script setup lang="ts">
+const supabase = useSupabaseClient()
+
+const user = useSupabaseUser()
+
+const router = useRouter()
+
 const items = [
   [{
-    label: '',
+    label: user.value?.email || '',
     slot: 'account',
     disabled: true,
   }],
   [{
     label: 'Settings',
     icon: 'i-heroicons-cog-8-tooth',
+    click: () => {
+      router.push('/settings')
+    },
   }],
   [{
     label: 'Sign out',
     icon: 'i-heroicons-arrow-left-on-rectangle',
+    click: async () => {
+      await supabase.auth.signOut()
+      router.go(0)
+    },
   }],
 ]
 </script>
@@ -19,7 +32,7 @@ const items = [
 <template>
   <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
     <UAvatar
-      src="https://avatars.githubusercontent.com/u/739984?v=4"
+      :src="user?.user_metadata?.avatar_url"
       alt="Avatar"
     />
     <template #account="{ item }">

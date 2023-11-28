@@ -13,7 +13,9 @@ definePageMeta({
       <p class="text-2xl text-green-500/50">
         AI Crypto Currency Trading Helper
       </p>
-      <UButton size="lg" label="Get Started" />
+      <NuxtLink to="/login">
+        <UButton size="lg" label="Get Started" />
+      </NuxtLink>
     </div>
   </div>
 </template>
