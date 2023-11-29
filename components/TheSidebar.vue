@@ -4,7 +4,7 @@ const createModal = useCreateModalState()
 
 <template>
   <aside
-    class="h-full fixed w-56 flex flex-col p-2
+    class="h-full fixed w-64 flex-col p-2 flex
     border-r border-gray-200/75 dark:border-gray-700/50"
   >
     <UButton

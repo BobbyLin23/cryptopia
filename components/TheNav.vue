@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
+
+const mobileSidebar = useMobileSidebarState()
 </script>
 
 <template>
@@ -10,6 +12,12 @@ const user = useSupabaseUser()
     <div class="text-2xl font-semibold text-green-500">
       Cryptopia
     </div>
+    <UButton
+      variant="ghost"
+      icon="i-carbon-menu"
+      class="mx-2 -mb-1.5 block lg:hidden"
+      @click="mobileSidebar.setOpen()"
+    />
     <div class="flex-auto" />
     <div class="flex items-center gap-3">
       <UButton

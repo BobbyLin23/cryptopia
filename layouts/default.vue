@@ -5,8 +5,11 @@
   <div class="h-full dark:bg-[#27272A]">
     <TheNav />
     <main class="flex">
-      <TheSidebar />
-      <div class="ml-56">
+      <div class="hidden lg:block">
+        <TheSidebar />
+      </div>
+      <MobileSidebar />
+      <div class="lg:ml-64 ml-0">
         <slot />
       </div>
     </main>
