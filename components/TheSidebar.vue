@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const createModal = useCreateModalState()
+const mobileSidebar = useMobileSidebarState()
 </script>
 
 <template>
@@ -10,7 +11,10 @@ const createModal = useCreateModalState()
     <UButton
       label="Add"
       class="px-4 py-2 flex justify-center my-2"
-      @click="createModal.setOpen()"
+      @click="() => {
+        createModal.setOpen()
+        mobileSidebar.setClose()
+      }"
     />
     <CurrencyList />
   </aside>

@@ -3,9 +3,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <div>
-    <div>
-      {{ route.params.slug }}
-    </div>
+  <div class="p-4">
+    {{ route.params.slug[0].toUpperCase() }}
   </div>
 </template>
