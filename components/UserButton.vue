@@ -30,7 +30,16 @@ const items = [
 </script>
 
 <template>
-  <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
+  <UDropdown
+    :items="items"
+    :ui="{
+      width: 'w-fit',
+      item: {
+        disabled: 'cursor-text select-text',
+      },
+    }"
+    :popper="{ placement: 'bottom-start' }"
+  >
     <UAvatar
       :src="user?.user_metadata?.avatar_url"
       alt="Avatar"
