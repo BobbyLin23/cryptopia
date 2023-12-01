@@ -81,8 +81,8 @@ async function signInWithGoogle() {
 
 <template>
   <div
-    class="border rounded-md p-4 w-[350px] flex flex-col gap-y-4
-  border-gray-200/75 dark:border-gray-700 shadow-md"
+    class="border rounded-md p-6 w-[350px] flex flex-col gap-y-4
+  border-gray-200/75 dark:border-gray-700 shadow-md dark:bg-neutral-900"
   >
     <h1 class="text-center text-xl font-semibold">
       Sign up to Cryptopia

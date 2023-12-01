@@ -57,6 +57,12 @@ async function signInWithGithub() {
       title: error.message,
     })
   }
+  else {
+    toast.add({
+      color: 'green',
+      title: 'Log in successfully!',
+    })
+  }
 }
 
 async function signInWithGoogle() {
@@ -73,13 +79,19 @@ async function signInWithGoogle() {
       title: error.message,
     })
   }
+  else {
+    toast.add({
+      color: 'green',
+      title: 'Log in successfully!',
+    })
+  }
 }
 </script>
 
 <template>
   <div
-    class="border rounded-md p-4 w-[350px] flex flex-col gap-y-4
-  border-gray-200/75 dark:border-gray-700 shadow-md"
+    class="border rounded-md p-6 w-[350px] flex flex-col gap-y-4
+  border-gray-200/75 dark:border-gray-700 shadow-md dark:bg-neutral-900"
   >
     <h1 class="text-center text-xl font-semibold">
       Sign in to Cryptopia

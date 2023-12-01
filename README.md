@@ -3,4 +3,4 @@
 - Nuxt
 - TypeScript
 - Tailwind CSS
-- PrimeVue
+- Nuxt UI

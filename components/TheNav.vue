@@ -21,7 +21,7 @@ const mobileSidebar = useMobileSidebarState()
     <div class="flex-auto" />
     <div class="flex items-center gap-3">
       <UButton
-        variant="ghost"
+        icon="i-carbon-dashboard"
         label="Dashboard"
         color="gray"
         @click="$router.push('/dashboard')"

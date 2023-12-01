@@ -5,7 +5,7 @@ const exchange = useExchangeState()
 </script>
 
 <template>
-  <div>
+  <div class="p-4">
     {{ user?.email }}
     <div>
       {{ language.language }}

@@ -1,8 +1,9 @@
 export const useLanguageState = defineStore('language', () => {
-  const language = ref('en')
+  const language = ref(localStorage.getItem('language') || 'zh')
 
   const setLanguage = (lang: string) => {
     language.value = lang
+    localStorage.setItem('language', lang)
   }
 
   return {
