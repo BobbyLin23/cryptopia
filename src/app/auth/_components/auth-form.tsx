@@ -20,7 +20,7 @@ export const AuthForm = () => {
   const handleSignIn = async (provider: 'github' | 'google') => {
     await signIn.social({
       provider,
-      callbackURL: '/dashboard',
+      callbackURL: '/',
     })
   }
 
