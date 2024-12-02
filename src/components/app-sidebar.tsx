@@ -1,9 +1,13 @@
+'use client'
+
 import Link from 'next/link'
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react'
+import { Home, Inbox, Settings, Activity, Rss } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -11,8 +15,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
+import { UserCenter } from './user-center'
 
-// Menu items.
 const items = [
   {
     title: 'Home',
@@ -20,40 +24,49 @@ const items = [
     icon: Home,
   },
   {
-    title: 'Inbox',
-    url: '#',
-    icon: Inbox,
-  },
-  {
     title: 'Market',
-    url: '#',
-    icon: Calendar,
+    url: '/market',
+    icon: Activity,
   },
   {
     title: 'Account',
-    url: '#',
-    icon: Search,
+    url: '/account',
+    icon: Inbox,
+  },
+  {
+    title: 'Follow',
+    url: '/follow',
+    icon: Rss,
   },
   {
     title: 'Settings',
-    url: '#',
+    url: '/settings',
     icon: Settings,
   },
 ]
 
 export function AppSidebar() {
+  const pathname = usePathname()
+
   return (
-    <Sidebar>
+    <Sidebar side="left">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-lg font-bold">
+          <SidebarGroupLabel className="text-xl font-bold">
             Cryptopia
           </SidebarGroupLabel>
-          <SidebarGroupContent>
+          <SidebarGroupContent className="mt-2">
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={
+                      item.url === '/'
+                        ? pathname === '/'
+                        : pathname.includes(item.url)
+                    }
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -65,6 +78,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="flex items-center">
+        <UserCenter />
+      </SidebarFooter>
     </Sidebar>
   )
 }
