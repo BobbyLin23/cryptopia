@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { ofetch } from 'ofetch'
 
 import {
   Card,
@@ -22,9 +23,9 @@ export function MarketOverview() {
   useEffect(() => {
     async function fetchPrices() {
       try {
-        const response = await fetch('/api/market/prices')
-        const data = await response.json()
-        if (data.data) {
+        const res = await ofetch<CryptoPrice[]>('/api/market/prices')
+
+        if (res) {
           const mainCryptos = [
             'BTC-USDT',
             'ETH-USDT',
@@ -32,7 +33,7 @@ export function MarketOverview() {
             'DOGE-USDT',
             'SOL-USDT',
           ]
-          const filteredPrices = data.data.filter((price: CryptoPrice) =>
+          const filteredPrices = res.filter((price: CryptoPrice) =>
             mainCryptos.includes(price.instId),
           )
 

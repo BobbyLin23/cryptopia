@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { ofetch } from 'ofetch'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -20,14 +21,14 @@ export function MarketAnalysis() {
   const generateAnalysis = async () => {
     setLoading(true)
     try {
-      const response = await fetch('/api/market/analysis', {
+      const response = await ofetch('/api/market/analysis', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ symbol }),
       })
-      const data = await response.json()
+      const data = response.data
       setAnalysis(data.analysis)
     } catch (error) {
       console.error('分析生成失败:', error)

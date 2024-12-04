@@ -1,7 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { Home, Inbox, Settings, Activity, Rss } from 'lucide-react'
+import {
+  Home,
+  Inbox,
+  Settings,
+  Activity,
+  Rss,
+  ShoppingCart,
+} from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 import {
@@ -37,6 +44,11 @@ const items = [
     title: 'Follow',
     url: '/follow',
     icon: Rss,
+  },
+  {
+    title: 'Trade',
+    url: '/trade',
+    icon: ShoppingCart,
   },
   {
     title: 'Settings',

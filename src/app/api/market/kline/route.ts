@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
+import { ofetch } from 'ofetch'
+
 import { OKX_CONFIG, generateSignature, getTimestamp } from '@/lib/okx'
+import { IKlineData, IResData } from '@/types'
 
 export async function GET(request: Request) {
   try {
@@ -17,7 +20,7 @@ export async function GET(request: Request) {
 
     const signature = generateSignature(timestamp, method, requestPath)
 
-    const response = await fetch(`${OKX_CONFIG.BASE_URL}${requestPath}`, {
+    const res = await ofetch<IResData<IKlineData>>(requestPath, {
       method,
       headers: {
         'OK-ACCESS-KEY': OKX_CONFIG.API_KEY!,
@@ -25,13 +28,12 @@ export async function GET(request: Request) {
         'OK-ACCESS-TIMESTAMP': timestamp,
         'OK-ACCESS-PASSPHRASE': OKX_CONFIG.PASSPHRASE!,
       },
+      baseURL: OKX_CONFIG.BASE_URL,
     })
 
-    const data = await response.json()
-
     // OKX返回的数据格式为：[时间戳, 开盘价, 最高价, 最低价, 收盘价, 成交量, 成交额]
-    const formattedData = data.data
-      .map((item: string[]) => ({
+    const formattedData = res.data
+      ?.map((item: IKlineData) => ({
         time: Math.floor(Number(item[0]) / 1000), // 转换为秒级时间戳
         open: Number(item[1]),
         high: Number(item[2]),
@@ -41,7 +43,7 @@ export async function GET(request: Request) {
       }))
       .sort((a, b) => a.time - b.time)
 
-    return NextResponse.json({ data: formattedData })
+    return NextResponse.json(formattedData)
   } catch (error) {
     console.error('获取K线数据失败:', error)
     return NextResponse.json({ error: '获取K线数据失败' }, { status: 500 })

@@ -14,6 +14,7 @@ import { SidebarTrigger } from './ui/sidebar'
 import { Fragment, useMemo } from 'react'
 import { ModeToggle } from './mode-toggle'
 import { TimePicker } from './time-picker'
+import { ClientOnly } from './client-only'
 
 export const NavigationBar = () => {
   const pathname = usePathname()
@@ -54,7 +55,9 @@ export const NavigationBar = () => {
         </Breadcrumb>
       </div>
       <div className="mr-2 flex items-center gap-2">
-        <TimePicker />
+        <ClientOnly>
+          <TimePicker />
+        </ClientOnly>
         <ModeToggle />
       </div>
     </header>

@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from 'react'
 import { createChart, ColorType, IChartApi } from 'lightweight-charts'
+import { ofetch } from 'ofetch'
+
+import { IKlineRes } from '@/types'
 
 interface MarketChartProps {
   symbol: string
@@ -16,12 +19,13 @@ export function MarketChart({ symbol }: MarketChartProps) {
 
     const fetchKlineData = async () => {
       try {
-        const response = await fetch(
+        const data = await ofetch<IKlineRes[]>(
           `/api/market/kline?symbol=${symbol}-USDT&interval=1D`,
         )
-        const data = await response.json()
 
-        if (!data.data || !chartContainer) return
+        console.log('data', data)
+
+        if (!data || !chartContainer) return
 
         // 确保在创建新图表前清除容器内容
         chartContainer.innerHTML = ''
@@ -44,7 +48,7 @@ export function MarketChart({ symbol }: MarketChartProps) {
         })
 
         const candlestickSeries = chart.addCandlestickSeries()
-        candlestickSeries.setData(data.data)
+        candlestickSeries.setData(data)
 
         const volumeSeries = chart.addHistogramSeries({
           color: '#26a69a',
@@ -52,21 +56,10 @@ export function MarketChart({ symbol }: MarketChartProps) {
             type: 'volume',
           },
           priceScaleId: '',
-          scaleMargins: {
-            top: 0.8,
-            bottom: 0,
-          },
         })
 
-        interface KLineData {
-          time: number
-          value: number
-          open: number
-          close: number
-        }
-
         volumeSeries.setData(
-          data.data.map((item: KLineData) => ({
+          data.map((item: IKlineRes) => ({
             time: item.time,
             value: item.value,
             color: item.open <= item.close ? '#26a69a' : '#ef5350',
